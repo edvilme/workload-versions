@@ -9,14 +9,18 @@ parameters:
   default: public/dotnet10-workloads
 
 jobs:
-- job: Print Parameters
-  displayName: Print Parameters
-  steps:
-  - script: |
-      echo "publishToFeed: $(publishToFeed)"
-      echo "feedForPublishing: $(feedForPublishing)"
-      echo "Build.SourcesDirectory: $(Build.SourcesDirectory)"
-    displayName: Print Parameters
+- template: /eng/common/templates-official/jobs/jobs.yml
+  parameters:
+    jobs:
+    - job: publishToFeed
+      displayName: Publish to Feed
+      displayName: Print Parameters
+      steps:
+      - script: |
+          echo "publishToFeed: $(publishToFeed)"
+          echo "feedForPublishing: $(feedForPublishing)"
+          echo "Build.SourcesDirectory: $(Build.SourcesDirectory)"
+        displayName: Print Parameters
   # - task: 1ES.PublishNuget@1
   #   displayName: 🟣 Publish NuGet package
   #   condition: eq(parameters.publishToFeed, true)
