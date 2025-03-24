@@ -123,6 +123,10 @@ extends:
       jobs:
       - deployment: Publish
         environment: 'DotNet-SDK-Workloads'
+        pool:
+          name: $(DncEngInternalBuildPool)
+          image: 1es-windows-2022
+          os: windows
         strategy:
           runOnce:
             deploy:
