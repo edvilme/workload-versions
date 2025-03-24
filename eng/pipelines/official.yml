@@ -116,16 +116,16 @@ extends:
           workloadDropNames: ${{ parameters.workloadDropNames }}
           primaryVsInsertionBranches: ${{ parameters.primaryVsInsertionBranches }}
           secondaryVsInsertionBranches: ${{ parameters.secondaryVsInsertionBranches }}
-      - stage: Publish
-        displayName: Publish
-        dependsOn: Build
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
-        jobs:
-        - deployment: Publish
-          environment: 'DotNet-SDK-Workloads'
-          strategy:
-            runOnce:
-              deploy:
-                steps:
-                - bash: |
-                    echo "Hello, World!"
+    - stage: Publish
+      displayName: Publish
+      dependsOn: Build
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+      jobs:
+      - deployment: Publish
+        environment: 'DotNet-SDK-Workloads'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+              - bash: |
+                  echo "Hello, World!"
