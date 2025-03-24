@@ -131,7 +131,7 @@ extends:
           runOnce:
             deploy:
               steps:
-              - template: /eng/pipelines/templates/jobs/workload-publish.yml@self
+              - template: /eng/pipelines/templates/steps/workload-publish.yml@self
                 parameters:
                   publishToFeed: ${{ parameters.publishToFeed }}
                   feedForPublishing: ${{ parameters.feedForPublishing }}
