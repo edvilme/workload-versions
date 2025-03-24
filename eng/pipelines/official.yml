@@ -121,11 +121,25 @@ extends:
       dependsOn: Build
       condition: succeeded()
       jobs:
-      - deployment: Publish
-        environment: 'DotNet-SDK-Workloads'
+      - template: /eng/common/templates-official/jobs/jobs.yml
+        deployment: Publish
+        environment: 'Public'
         strategy:
           runOnce:
             deploy:
               steps:
               - bash: |
-                  echo "Hello, World!"
+                  echo "feedForPublishing: ${{ parameters.feedForPublishing }}"
+                  echo "publishToFeed: ${{ parameters.publishToFeed }}"
+                  echo "SourcesDirectory: $(Build.SourcesDirectory)"
+              # - task: 1ES.PublishNuget@1
+              #   displayName: 🟣 Publish NuGet package
+              #   condition: eq(parameters.publishToFeed, true)
+              #   inputs:
+              #     useDotNetTask: true
+              #     packagesToPush: $(Build.SourcesDirectory)/artifacts/packages/**/*.nupkg
+              #     packageParentPath: $(Build.SourcesDirectory)/artifacts/packages
+              #     publishVstsFeed: ${{ parameters.feedForPublishing }}
+              #     nuGetFeedType: internal
+              #     allowPackageConflicts: false
+              #     publishPackageMetadata: true
