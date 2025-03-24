@@ -1,0 +1,30 @@
+parameters:
+- name: publishToFeed
+  displayName: Publish to feed
+  type: boolean
+  default: false
+- name: feedForPublishing
+  displayName: Feed for publishing
+  type: string
+  default: public/dotnet10-workloads
+
+jobs:
+- job: Print Parameters
+  displayName: Print Parameters
+  steps:
+  - script: |
+      echo "publishToFeed: $(publishToFeed)"
+      echo "feedForPublishing: $(feedForPublishing)"
+      echo "Build.SourcesDirectory: $(Build.SourcesDirectory)"
+    displayName: Print Parameters
+  # - task: 1ES.PublishNuget@1
+  #   displayName: 🟣 Publish NuGet package
+  #   condition: eq(parameters.publishToFeed, true)
+  #   inputs:
+  #     useDotNetTask: true
+  #     packagesToPush: $(Build.SourcesDirectory)/artifacts/packages/**/*.nupkg
+  #     packageParentPath: $(Build.SourcesDirectory)/artifacts/packages
+  #     publishVstsFeed: ${{ parameters.feedForPublishing }}
+  #     nuGetFeedType: internal
+  #     allowPackageConflicts: false
+  #     publishPackageMetadata: true
