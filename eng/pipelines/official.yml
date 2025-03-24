@@ -121,8 +121,7 @@ extends:
       dependsOn: Build
       condition: succeeded()
       jobs:
-      - template: /eng/common/templates-official/jobs/jobs.yml
-        deployment: Publish
+      - deployment: Publish
         environment: 'Public'
         strategy:
           runOnce:
